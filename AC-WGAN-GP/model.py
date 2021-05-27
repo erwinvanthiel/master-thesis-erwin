@@ -35,6 +35,35 @@ class AuxiliaryClassifier(nn.Module):
         return aux
 
 
+class TargetClassifier(nn.Module):
+    def __init__(self, channels_img, output_classes):
+        super(TargetClassifier, self).__init__()
+        self.conv1 = self._block(channels_img, 64, 5, 1, 1)
+        self.conv2 = self._block(64, 64, 5, 1, 1)
+        self.fc1 = nn.Sequential(nn.Linear(64*60*60, 128, bias=True), nn.ReLU())
+        self.dropout1 = nn.Dropout(p=0.25)
+        self.dropout2 = nn.Dropout(p=0.5)
+        self.fc2 = nn.Linear(128, output_classes, bias=True)
+
+    def _block(self, in_channels, out_channels, kernel_size, stride, padding):
+        return nn.Sequential(
+            nn.Conv2d(
+                in_channels, out_channels, kernel_size, stride, padding, bias=False,
+            ),
+            nn.ReLU(),
+        )
+
+    def forward(self, x):
+        x = self.conv1(x)
+        x = self.conv2(x)
+        x = self.dropout1(x)
+        x = x.view(-1, 64*60*60)
+        x = self.fc1(x)
+        x = self.dropout2(x)
+        classes = self.fc2(x)
+        return classes
+
+
 
 class Discriminator(nn.Module):
     def __init__(self, channels_img, features_d):
