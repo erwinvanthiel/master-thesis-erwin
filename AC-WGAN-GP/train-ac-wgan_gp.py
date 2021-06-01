@@ -108,7 +108,6 @@ for epoch in range(NUM_EPOCHS):
     for batch_idx, (real, label) in enumerate(loader):
         real = real.to(device)
         cur_batch_size = real.shape[0]
-        class_onehot = generate_class_onehot(label, cur_batch_size, NUM_CLASSES, device)
         label = label.to(device)
         # Train Critic: max E[critic(real)] - E[critic(fake)]
         # equivalent to minimizing the negative of that
