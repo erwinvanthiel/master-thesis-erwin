@@ -45,7 +45,7 @@ Thus far I have not been able to find a novel way to generate synthetic adversar
 An implementation of PGD was used on the mlc-model but the attack had not the desired effect. After the attack was performed almost all positive labels were turned of in the prediction. 
 
 ## Week 4
-In order to verify the working of the PGD implementation, the attack is performed in the single-label case. 
+In order to verify the working of the PGD implementation, the attack is performed in the single-label case. When a imageNet pretrained resnet model is attacked with pgd in MSCOCO the results show  that the attack has little influence, whereas the attack is very effective in on a single ImageNet image.
  
 
 ## Bibliography
