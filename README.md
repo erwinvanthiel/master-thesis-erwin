@@ -55,7 +55,7 @@ In order to verify the working of the PGD implementation, the attack is performe
 
 
 #### Results
-![ACGAN](/images/AC-WGAN_GP.png)  
+![ACGAN](/images/pgd-attack-on-asl.png)  
 
 
 ## Bibliography
